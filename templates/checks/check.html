@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block header %}
+{% include 'includes/header.html' %}
+{% endblock header %}
+
+{% block menu_vertical %}
+{% include 'includes/menu_vertical.html' %}
+{% endblock menu_vertical %}
+<!--bloque para cargar los depositos realizados a la cuenta-->
+{% block content %}
+<div class = "gird container shadow centrar">
+    <h5 class="red"> Registro-Check de empleados</h5>
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    <br>
+<form method="post">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="button success">Registrar</button>
+</form>
+
+</div>
+</div>
+{% endblock content %}
