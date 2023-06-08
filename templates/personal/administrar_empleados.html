@@ -1,0 +1,70 @@
+{%extends 'layout.html'%}
+{% load static %}
+
+{% block title %}
+    Administrador de registros
+{% endblock title %}
+{% block content %}
+
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell h1-cabecera2"> Lista de empleados</h1>
+                <form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
+                    <div class="cell large-7">
+                        <input type="text" id='trabajo' name="trabajo" placeholder="buscar empleados">
+                    </div>
+                    <div class="cell large-2">
+                        <button class="submit success button" type='submit'>Buscar</button>
+                    </div>
+                </form>
+            <div class="cell">
+                <table  class="hover">
+                    <thead>
+                      <tr>
+                        <th width="150">Nombre</th>
+                        <th width="150">Apellido</th>
+                        <th width="150">Departamento</th>
+                        <th width="150">Cargo</th>
+                        <th width="75">Accion</th>
+                        <th width="75"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for lista in personas %}
+                            <tr>             
+                                <td>{{lista.first_name}}</td>
+                                <td>{{lista.last_name}}</td>
+                                <td>{{lista.departamento}}</td>
+                                <td>{{lista.cargo}}</td> 
+                                <td><a class="button success"  href="{% url 'app_personal:actualizar' lista.id %}">Editar</a></td>
+                                <td><a class="button alert"  href="{% url 'app_personal:eliminar' lista.id %}">eliminar</a></td>                    
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                  </table>
+            </div>
+            {% if is_paginated %}
+                <div class="cell">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous  %}
+                            <li class="pagination-previous"><a href="?page={{page_obj.previous_page_number}}">atras</a></li>
+                            {% endif %}
+                            {% for pagina in paginator.page_range %}
+                                {%if pagina == page_obj.number%}
+                                    <li class="current"><span class="show-for-sr">You're on page</span>{{pagina}}</li>
+                                {% else %}        
+                                    <li><a href="?page={{pagina}}" aria-label="Pagina {{pagina}}">{{pagina}}</a></li>
+                                {%endif%}
+                            {% endfor %}
+                            {% if page_obj.has_next  %}
+                                <li class="pagination-next"><a href="?page={{page_obj.next_page_number}}" aria-label="Next page">siguiente</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            {% endif %}
+        </div>  
+{% endblock content %}
+
+ 

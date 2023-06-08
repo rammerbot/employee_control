@@ -33,7 +33,7 @@ class CheckView(FormView):
         elif register == "lunch":
             lunch_start = LunchStart.objects.verify_or_create_start_lunch(employee, branch)
             if lunch_start == "success":
-                messages.warning(self.request,"El Registro del almuerzo ha creado exitosamente")
+                messages.success(self.request,"El Registro del almuerzo ha creado exitosamente")
             elif lunch_start == "created":
                 luch_end = LunchEnd.objects.verify_or_create_end_lunch(employee, branch)
                 if luch_end == "success":

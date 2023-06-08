@@ -1,16 +1,23 @@
-{% extends 'layout.html' %}
 {% load static %}
-
-{% block header %}
-{% include 'includes/header.html' %}
-{% endblock header %}
-
-{% block menu_vertical %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/app.css'%}">
+    <title>
+        {%block title%}
+        Registro de Horarios
+        {% endblock %}
+    </title>
+</head>
+<body>
+  
 {% include 'includes/menu_vertical.html' %}
-{% endblock menu_vertical %}
 <!--bloque para cargar los depositos realizados a la cuenta-->
-{% block content %}
-<div class = "gird container shadow centrar">
+<div class = "gird container shadow centrar margen_superior">
     <h5 class="red"> Registro-Check de empleados</h5>
     {% if messages %}
   <ul class="messages">
@@ -27,4 +34,12 @@
 
 </div>
 </div>
-{% endblock content %}
+
+    <script src="{% static 'js/vendor/jquery.js'%}"></script>
+    <script src="{% static 'js/vendor/what-input.js'%}"></script>
+    <script src="{% static 'js/vendor/foundation.min.js'%}"></script>
+    <script>
+      $(document).foundation();
+    </script>
+</body>
+</html>

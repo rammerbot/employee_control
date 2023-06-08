@@ -23,9 +23,13 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'applications.employee',
+    'applications.personal',
+    'applications.departamento',
+
 ]
 
 SYSTEM_APP = [
+    'ckeditor',
 
 ]
 
@@ -46,7 +50,7 @@ ROOT_URLCONF = 'attendance.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

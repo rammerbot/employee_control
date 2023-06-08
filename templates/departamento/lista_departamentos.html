@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% include 'includes/header.html'%}
+
+{% block title %}
+    Departamentos
+{% endblock title %}
+{% block content %}
+
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell h1-cabecera2">Departamentos de la empresa</h1>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre del departamento
+                            </th>
+                            <th>
+                                Referencia
+                            </th>
+                            <th>
+                                Accion
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for departamento in departamentos %}
+                            <tr>
+                                <td width='200'>
+                                    {{departamento.name}}
+                                </td>
+                                <td width='200'>
+                                    {{departamento.short_name}}
+                                </td>
+                                <td width='200'>
+                                    <a class="button warning"  href="{% url 'app_personal:departamento_personal' departamento.id %}">Ver Empleados</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

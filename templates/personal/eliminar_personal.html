@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% include 'includes/header.html' %}
+
+{% block title %}
+    Confirmacion
+{% endblock title %}
+
+{% block content %}
+<div class="grid-container">
+    <div class="grid-x">
+        <div class="cell large-12 callout secundary">
+            <h2 class="cell">Confirmar que desea eliminar a:</h2>
+            <p class="cell eliminar_nombre">{{object.first_name}} {{object.last_name}} </p>
+            <form class="cell" method="POST">{% csrf_token %}
+                <button class="button alert" type="submit">Eliminar</button>
+                <a class="button delete boton_cancelar" href="{% url 'app_personal:administrar' %}">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

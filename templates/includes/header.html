@@ -1,19 +1,32 @@
-{% load static %}
-<div class="grid-x top-bar">
-  <div class="cell navegacion" role="region" aria-label="Favorite Space Pictures" data-orbit>
-    <ul class="orbit-container">
-      <li class="is-active orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image cabe" src="{% static 'img/cabecera_.png' %}"  alt="Space">
-          <figcaption class="orbit-caption">Sistemas de control RammerBot.</figcaption>
-        </figure>
-      <li class="orbit-slide">
-        <figure class="orbit-figure">
-          <img class="orbit-image" src="{% static 'img/cabecera.png' %}"alt="Space">
-          <figcaption class="orbit-caption">Conectamos tu empresa con el futuro</figcaption>
-        </figure>
-      </li>
-    </ul>
-  </div>    
+
+<div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li class="menu-text">
+          <a class ="nombre_header" href="{% url 'app_personal:home' %}">Empleados</a>
+        </li>
+        <li class="menu-text">
+          <a href="{% url 'app_personal:lista_empleados'%}">Lista</a>
+        </li>
+        <li class="menu-text">
+            <a href="{%url 'app_departamento:departamentos'%}">Departamentos</a>
+        </li>
+        <li class="menu-text">
+          <a href="{% url 'app_personal:administrar' %}">Administrar</a>
+        </li>
+        <li class="menu-text">
+          <a href="{%url 'app_personal:lista_empleados_off'%}">Antiguos empleados</a>
+        </li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><a href="{% url 'app_personal:add_empleado' %}" class="button">Registrar Empleado</a></li>
+      </ul>
+    </div>
+  </div>
+
   
-</div>
+<!-- menu vertical
+
+-->

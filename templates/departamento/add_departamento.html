@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% include 'includes/header.html' %}
+
+{% block title %}
+    Crear nuevo departamento
+{% endblock title %}
+
+{% block content %}
+    <div class="grid-container">
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            <form class="callout" method = 'POST'> {% csrf_token %}
+                <h3 class="h1-cabecera2">Crear nuevo departamento</h3>
+                {{form.as_p}}
+                <button class="button warning" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
+    

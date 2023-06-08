@@ -1,0 +1,27 @@
+{%extends 'layout.html'%}
+{% load static %}
+
+{% block title %}
+    Administrador de registros
+{% endblock title %}
+{% block content %}
+   <div class="grid-container">
+        
+    <h1 class="h1-cabecera"> Administrador</h1>
+    <hr>
+        <div class="expanded button-group align-center">
+            <a href="{% url 'app_departamento:add_departamento' %}" class="secondary button">Cargar Departamento</a>
+        </div>
+        <div class="expanded button-group align-center">
+            <a href="{% url 'app_personal:cargo' %}" class="warning button">Cargar Cargo</a>
+        </div>
+        <div class="expanded button-group align-center">
+            <a href="{% url 'app_personal:habilidad' %}" class="alert button">Cargar Habilidad</a>
+        </div>
+        <div class="expanded button-group align-center">
+            <a href="{% url 'app_personal:administrar_empleados' %}" class=" button">Editar Empleados</a>
+        </div>
+   </div>
+{% endblock content %}
+
+ 

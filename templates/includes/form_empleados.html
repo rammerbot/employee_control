@@ -1,0 +1,94 @@
+<div class="grid-container">
+    <h1 class= "cell h1-cabecera2">Registro de empleado</h1>
+    <div class="cell align-center">
+      <form class="callout grid-x grid-margin-x" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class="medium-6 cell">
+            <label>Nombre
+              {{form.first_name}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Apellido
+              {{form.last_name}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Fecha de Nacimiento
+              {{form.fecha_nacimiento}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Tipo de Documento
+              {{form.t_documento}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Numero de Documento
+              {{form.n_documento}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Cargar Foto
+              {{form.foto}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+          <label>N° Telefonico
+            {{form.n_telefonico}}
+          </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Departamento
+              {{form.departamento}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Cargo
+              {{form.cargo}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Fecha de Ingreso
+              {{form.fecha_ingreso}}
+            </label>
+        </div>
+        <div class="medium-8 cell">
+            <label>Habilidades
+              {{form.habilidades}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Aportes</label>
+              {{form.aportes}}
+        </div>
+        <div class="medium-6 cell">
+            <label>Deficiencias</label>
+              {{form.deficiencias}}
+        </div>
+        <div class="medium-6 cell">
+            <label>Recomendaciones</label>
+              {{form.recomendaciones}}
+        </div>
+        <div class="medium-8 cell">
+            <label>Numero de Amonestaciones
+              {{form.n_faltas}}
+            </label>
+        </div>
+        <div class="medium-6 cell">
+            <label>Detalles de Amonestaciones</label>
+              {{form.falta_des}}
+        </div>
+        <div class="medium-8 cell">
+            <label>Cargar Curriculum</label>
+            {{form.curriculum}}
+        </div>
+        <div class="medium-6 cell">
+            <label>Activo</label>
+              {{form.activo}}
+        </div>
+          <div class="cell">
+            <button class="button warning" type="submit">Guardar</button>
+       </div>
+      </form>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% include 'includes/header.html' %}
+
+{% block title %}
+    Empleado: {{empleado.first_name}}
+{% endblock title %}
+
+{% block content %}
+    <div class="grid-container">
+        <h1 class="h1-cabecera2">Detalles del empleado</h1>
+        <div class="media-object">
+            <div class="media-object-section">
+              <div class="thumbnail carnet" >
+                <img src="{{empleado.foto.url}}">
+              </div>
+            </div>
+            <div class="media-object-section">
+              <h4>{{empleado.first_name}} {{empleado.last_name}}</h4>
+              <p class="fecha">Fecha de Nacimiento: {{empleado.fecha_nacimiento}}</p>
+              <hr>
+              <table>
+                <thead>
+                    <tr>
+                        <th width="150">Departamento</th>
+                        <th width="150">Cargo</th>
+                        <th width="180">Fecha de Ingreso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{empleado.departamento}}</td>
+                        <td>{{empleado.cargo}}</td>
+                        <td>{{empleado.fecha_ingreso}}</td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th width="150">Habilidades</th>
+                        <th width="150">Numero de Amonestaciones</th>
+                        <th width="150">Descripcion de Amonestaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul>
+                            {% for habilidad in empleado.habilidades.all %}
+                                <li>{{habilidad}}</li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{empleado.n_faltas}}</td>
+                        <td>{{empleado.falta_des|safe}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <h4>Descargar resumen Curricular</h4>
+            <a href="{{empleado.curriculum.url}}" class="button">Descarga "Aqui"</a>
+            <hr>
+            <h4>Aportes del empleado</h4>
+              <p>{{empleado.aportes|safe}}</p>
+            <hr>
+            <h4>Deficiencias del empleado</h4>
+            <p>{{empleado.deficiencias|safe}}</p>
+            <hr>
+            <h4>Recomendaciones para el empleado</h4>
+            <p>{{empleado.recomendaciones|safe}}</p>
+            <hr>
+            </div>
+          </div>
+    </div>
+{% endblock content %}
