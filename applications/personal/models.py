@@ -1,6 +1,8 @@
 from django.db import models
 from applications.departamento.models import Departamento
 from ckeditor.fields import RichTextField
+from model_utils.models import TimeStampedModel
+from .managers import EmployeeManager
 
 # Create your models here.
 
@@ -24,7 +26,7 @@ class Cargo(models.Model):
         return self.cargo
 
 
-class Personal(models.Model):
+class Personal(TimeStampedModel):
     DOCUMENT_CHOISES = [
         ('DNI', 'DNI',),
         ('CI', 'CI',),
@@ -34,6 +36,7 @@ class Personal(models.Model):
    
     first_name = models.CharField('Nombre', max_length=60)
     last_name = models.CharField('Apellido', max_length=50)
+    card = models.CharField("Tarjeta", max_length=40)
     fecha_nacimiento = models.DateField("Fecha de nacimiento")
     t_documento = models.CharField('Tipo de Documento',max_length=30, choices=DOCUMENT_CHOISES, default='DNI')
     n_documento = models.IntegerField('Numero de documento')
@@ -43,6 +46,7 @@ class Personal(models.Model):
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     fecha_ingreso = models.DateField('Fecha de ingreso')
     habilidades = models.ManyToManyField(Habilidades)
+    dotacion = RichTextField("Dotacion de uniformes", blank=True)
     aportes =  RichTextField('Aportes', blank=True)
     deficiencias = RichTextField('Deficiencias',blank=True)
     recomendaciones = RichTextField('Recomendaciones', blank=True)
@@ -50,6 +54,7 @@ class Personal(models.Model):
     falta_des = RichTextField('Descripcion de faltas', blank=True)
     activo = models.BooleanField("Activo", default=True)
     curriculum = models.FileField('Curriculum', upload_to='curriculums/')
+    objects = objects = EmployeeManager()
     
     class Meta:
         verbose_name = 'Empleado'

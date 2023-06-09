@@ -57,6 +57,7 @@
             <hr>
             <h4>Descargar resumen Curricular</h4>
             <a href="{{empleado.curriculum.url}}" class="button">Descarga "Aqui"</a>
+            <a href="{%url 'employee_app:inform' empleado.id %}" class="button">Ver control de Asistencias</a>
             <hr>
             <h4>Aportes del empleado</h4>
               <p>{{empleado.aportes|safe}}</p>

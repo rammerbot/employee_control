@@ -5,18 +5,83 @@
 {% include 'includes/header.html' %}
 {% endblock header %}
 
-{% block menu_vertical %}
-{% include 'includes/menu_vertical.html' %}
-{% endblock menu_vertical %}
 <!--bloque para cargar los depositos realizados a la cuenta-->
 {% block content %}
-<div class = "gird container shadow centrar">
-    <h5> Registro de Depositos Realizados</h5>
-<form method="post">{% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="button success">Guardar</button>
-</form>
-
+<div class = "grid-container">
+    <h1 class="h1-cabecera2">Control De Asistencia de <strong>{{employee.first_name}} {{employee.last_name}}</strong></h1>
+    <div class="grid-x">
+        <div class="cell largue-7">
+            <form class="callout" method ='GET'> {% csrf_token %}
+                <h3 class="h1-cabecera2">Indique la fecha de la Jornada</h3>
+                <hr>
+                <input type="date" name="date" id="date"> Introduzca la fecha</input>
+                <button class="button warning" type="submit">Buscar</button>
+            </form>
+        </div>
+        <h3 class="cell h1-cabecera2 red">Registro de Horarios</h3>
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Hora de Entrada
+                        </th>
+                        <th>
+                            Hora de Salida
+                        </th>
+                        <th>
+                            Total de horas Trabajadas
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width='200'>
+                            {{entry_day}}
+                        </td>
+                        <td width='200'>
+                            {{exit_day}}
+                        </td>
+                        <td width='200'>
+                            <p>{{day_hours}}:{{day_minuts}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <h3 class="cell h1-cabecera2 red">Registro de Tiempo de Almuerzo</h3>
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Inicio de Hora de Almuerzo
+                        </th>
+                        <th>
+                            Final de Hora de Almuerzo
+                        </th>
+                        <th>
+                            Total Tiempo de Almuerzo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width='200'>
+                            {{start_lunch}}
+                        </td>
+                        <td width='200'>
+                            {{end_lunch}}
+                        </td>
+                        <td width='200'>
+                            <p>{{lunch_hours}}:{{lunch_minuts}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </div>
 {% endblock content %}

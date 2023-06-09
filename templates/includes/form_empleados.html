@@ -1,6 +1,13 @@
 <div class="grid-container">
     <h1 class= "cell h1-cabecera2">Registro de empleado</h1>
     <div class="cell align-center">
+      {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
       <form class="callout grid-x grid-margin-x" method="POST" enctype="multipart/form-data">{% csrf_token %}
         <div class="medium-6 cell">
             <label>Nombre
@@ -11,6 +18,11 @@
             <label>Apellido
               {{form.last_name}}
             </label>
+        </div>
+        <div class="medium-6 cell">
+          <label>Tarjeta
+            {{form.card}}
+          </label>
         </div>
         <div class="medium-6 cell">
             <label>Fecha de Nacimiento
@@ -57,6 +69,10 @@
               {{form.habilidades}}
             </label>
         </div>
+        <div class="medium-6 cell">
+          <label>Dotacion y Uniformes</label>
+          {{form.dotacion}}
+      </div>
         <div class="medium-6 cell">
             <label>Aportes</label>
               {{form.aportes}}
