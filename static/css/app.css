@@ -170,3 +170,15 @@ body {
   .margen_superior {
     margin-top: 50px;
   }
+  .blue {
+    background-color: #4c97d4f2;
+    color: whitesmoke;
+    box-shadow: 0px 0px 10px #333;
+    text-align: center;
+}
+
+.blue:hover {
+    background-color: #2e2c2a;
+    color: white;
+    box-shadow: 0px 0px 10px #333;
+}

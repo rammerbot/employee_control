@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from .models import *
+
 
 class Empleado_form(forms.ModelForm):
     
@@ -80,5 +82,6 @@ class CargoForm(forms.ModelForm):
             }
 
 
-
-
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))

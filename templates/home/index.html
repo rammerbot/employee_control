@@ -39,7 +39,35 @@
         </div>
     </div>
     <!--fin de la imagen de portada-->
-
+    {%if not user.is_authenticated%}
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x align-center">
+                <div class="cell medium-6 large-4" style="margin-top: 2em;">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-divider">
+                        <h4>Acceso de usuario</h4>
+                        </div>
+                        <div class="card-section">
+                            <form class="grid-x grid-margin-x" method ="POST"> {% csrf_token %}
+                                <div class="cell medium-12">
+                                    <label>Usuario:
+                                    <input type="text" placeholder="Usuario" name="username" id="username">
+                                    </label>
+                                </div>
+                                <div class="cell medium-12">
+                                    <label>Contraseña:
+                                    <input type="password" placeholder="Contraseña ..." name="password" id="password">
+                                    </label>
+                                </div>
+                                <button type="submit" class="cell hollow button primary">Acceder</button>
+                                <a class="cell hollow button alert" href="#">Registrar</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endif%}
     <!--inicio de bloque de bienvenida-->
     <div class="grid-x align-center">
         <h1 class="cell large-8" style="font-size: 22px; text-align: center;">Bienvenido al sistema de registro de empleados</h1>

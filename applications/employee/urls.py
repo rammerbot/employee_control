@@ -6,5 +6,4 @@ app_name = "employee_app"
 urlpatterns = [
     path('template/', views.CheckView.as_view(), name="template"),
     path('inform/<pk>/', views.HourList.as_view(), name="inform"),
-    path("date_select/", views.DateSelect.as_view(), name="date_select")
 ]

@@ -3,7 +3,7 @@
     <div class="top-bar-left">
       <ul class="dropdown menu" data-dropdown-menu>
         <li class="menu-text">
-          <a class ="nombre_header" href="{% url 'app_personal:home' %}">Empleados</a>
+          <a class ="nombre_header" href="{% url 'app_personal:home' %}">Hola</a>
         </li>
         <li class="menu-text">
           <a href="{% url 'app_personal:lista_empleados'%}">Lista</a>
@@ -22,6 +22,7 @@
     <div class="top-bar-right">
       <ul class="menu">
         <li><a href="{% url 'app_personal:add_empleado' %}" class="button">Registrar Empleado</a></li>
+        {% if user.is_authenticated %}<li><a href="{% url 'app_personal:logout' %}" class="cell hollow button alert">Cerrar sesión</a></li>{% endif %}
       </ul>
     </div>
   </div>

@@ -5,20 +5,22 @@
 {% include 'includes/header.html' %}
 {% endblock header %}
 
-<!--bloque para cargar los depositos realizados a la cuenta-->
+<!--bloque para cargar los horarios de los empleados-->
 {% block content %}
 <div class = "grid-container">
     <h1 class="h1-cabecera2">Control De Asistencia de <strong>{{employee.first_name}} {{employee.last_name}}</strong></h1>
     <div class="grid-x">
         <div class="cell largue-7">
+            <!--Form para filtrar fechas-->
             <form class="callout" method ='GET'> {% csrf_token %}
-                <h3 class="h1-cabecera2">Indique la fecha de la Jornada</h3>
+                <h4 class="h1-cabecera2">Indique la fecha de la Jornada</h4>
                 <hr>
-                <input type="date" name="date" id="date"> Introduzca la fecha</input>
+                <input type="date" name="date" id="date"></input>
                 <button class="button warning" type="submit">Buscar</button>
             </form>
         </div>
-        <h3 class="cell h1-cabecera2 red">Registro de Horarios</h3>
+        <!--Tabla de horas de trabajo-->
+        <h3 class="cell h1-cabecera2 blue">Registro de Horarios</h3>
         <div class="cell">
             <table>
                 <thead>
@@ -31,6 +33,9 @@
                         </th>
                         <th>
                             Total de horas Trabajadas
+                        </th>
+                        <th>
+                            Sucursal
                         </th>
                     </tr>
                 </thead>
@@ -45,12 +50,16 @@
                         <td width='200'>
                             <p>{{day_hours}}:{{day_minuts}}</p>
                         </td>
+                        <td width='200'>
+                            <p>{{branch}}</p>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <hr>
-        <h3 class="cell h1-cabecera2 red">Registro de Tiempo de Almuerzo</h3>
+        <!--tabla de tiempo de almuerzos-->
+        <h3 class="cell h1-cabecera2 blue">Registro de Tiempo de Almuerzo</h3>
         <div class="cell">
             <table>
                 <thead>

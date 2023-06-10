@@ -12,9 +12,7 @@ from .models import *
 from .functions import *
 from applications.personal.models import Personal
 
-# Create your views here.
-
-
+# Registro de jornadas y almuerzos
 class CheckView(FormView):
     template_name = "checks/check.html"
     form_class = CheckForm
@@ -53,19 +51,7 @@ class CheckView(FormView):
                 messages.warning(self.request,"Ya ha sido registrada su salida el dia de hoy")
             
         return super().form_valid(form)
-    
-class DateSelect(DetailView):
-    template_name = "informs/date_select.html"
-    model = Personal
-    context_object_name = "employee"
-
-    def get_context_data(self, **kwargs):
-        
-        context = super().get_context_data(**kwargs)
-        
-        return context
-
-
+# Visualizacion de horas de trabajo por fechas y trabajador
 class HourList(DetailView):
 
     template_name = "informs/inform.html"
@@ -83,6 +69,13 @@ class HourList(DetailView):
             exit_hours = ExitHour.objects.filter(employee=employee, created__date=date).last()
             lunch_start = LunchStart.objects.filter(employee=employee, created__date=date).first()
             lunch_end = LunchEnd.objects.filter(employee=employee, created__date=date).first()
+            if entry_hours:
+                branch = entry_hours.branch
+            elif exit_hours:
+                branch = exit_hours.branch
+            else:
+                branch = "No Existe Registro"
+                
             # Date Validation, valida que se seleccione una fecha antes de mostrar la informacion
         
             # Calculo de los tiempos
@@ -94,21 +87,25 @@ class HourList(DetailView):
                 context['exit_day'] = exit_hours.created.strftime('%H:%M:%S')
                 context['day_hours'] = entry_hours_calc
                 context['day_minuts'] = entry_minuts_calc
+                context['branch'] = branch
             elif entry_hours and not exit_hours:
                 context['entry_day'] = entry_hours.created.strftime('%H:%M:%S')
                 context['exit_day'] = "Salida Sin Registro"
                 context['day_hours'] = "Imposible Calcular Registro"
                 context['day_minuts'] = "Imposible Calcular Registro"
+                context['branch'] = branch
             elif not entry_hours and exit_hours:
                 context['entry_day'] = "Entrada Sin Registro"
                 context['exit_day'] = exit_hours.created.strftime('%H:%M:%S')
                 context['day_hours'] = "Imposible Calcular Registro"
                 context['day_minuts'] = "Imposible Calcular Registro"
+                context['branch'] = branch
             else: 
                 context['entry_day'] = 'No Existe Registro'
                 context['exit_day'] = 'No Existe Registro'
                 context['day_hours'] = "00"
                 context['day_minuts'] = "00"
+                context['branch'] = branch
             # Lunch
             if lunch_start and lunch_end:
                 time_diference_lunch = lunch_end.created - lunch_start.created
@@ -118,16 +115,19 @@ class HourList(DetailView):
                 context['end_lunch'] =lunch_end.created.strftime('%H:%M:%S')
                 context['lunch_hours'] = lunch_hours_calc
                 context['lunch_minuts'] = lunch_minuts_calc
+                context['branch'] = branch
             elif lunch_start and not lunch_end:
                 context['start_lunch'] = lunch_start.created.strftime('%H:%M:%S')
                 context['end_luch'] = "Sin Registro de Regreso de Almuerzo"
                 context['lunch_hours'] = '00'
                 context['lunch_minuts'] = '00'
+                context['branch'] = branch
             else:
                 context['start_lunch'] = 'No Existe Registro'
                 context['end_lunch'] = 'No Existe Registro'
                 context['lunch_hours'] = "00"
                 context['lunch_minuts'] = "00"
+                context['branch'] = branch
         else:
             context['entry_day'] = 'No Existe Registro'
             context['exit_day'] = 'No Existe Registro'
@@ -137,5 +137,6 @@ class HourList(DetailView):
             context['end_lunch'] = 'No Existe Registro'
             context['lunch_hours'] = "00"
             context['lunch_minuts'] = "00"
+            context['branch'] = "Realizar Busqueda por Fecha"
 
         return context

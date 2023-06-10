@@ -4,7 +4,9 @@ from . import views
 app_name = 'app_personal'
 
 urlpatterns = [
-    path('', views.Index_view.as_view(), name="home"),
+    
+    path('', views.IndexView.as_view(), name="home"),
+    path('logout/', views.Logout.as_view(), name="logout"),
     path('list_employed/', views.List_employed.as_view(), name='lista_empleados'),
     path('list_employed_off/', views.List_employed_off.as_view(), name='lista_empleados_off'),
     path('add_empleado/', views.Crear_empleado.as_view(), name='add_empleado'),
@@ -13,7 +15,6 @@ urlpatterns = [
     path('administrar/', views.Administrar.as_view(), name='administrar'),
     path('administrar_empleados/', views.Administrar_empleados.as_view(), name='administrar_empleados'),
     path('actualizar/<pk>', views.Actualizar.as_view(), name='actualizar'),
-    path('guardado-exitoso', views.Guardado_Exitoso.as_view(),name='guardado-exitoso'),
     path('eliminar/<pk>', views.Eliminar_personal.as_view(),name='eliminar'),
     path('cargo/', views.Add_Cargo.as_view(),name='cargo'),
     path('add_habilidad/', views.Add_Habilidad.as_view(),name='habilidad'),
