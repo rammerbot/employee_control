@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="grid-container">
+    <div class="grid-container fondo">
         <h1 class="h1-cabecera2">Detalles del empleado</h1>
         <div class="media-object">
             <div class="media-object-section">
@@ -58,6 +58,9 @@
             <h4>Descargar resumen Curricular</h4>
             <a href="{{empleado.curriculum.url}}" class="button">Descarga "Aqui"</a>
             <a href="{%url 'employee_app:inform' empleado.id %}" class="button">Ver control de Asistencias</a>
+            <hr>
+            <h4>Dotacion de Uniforme</h4>
+              <p>{{empleado.dotacion|safe}}</p>
             <hr>
             <h4>Aportes del empleado</h4>
               <p>{{empleado.aportes|safe}}</p>

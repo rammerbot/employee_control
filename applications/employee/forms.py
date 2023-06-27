@@ -9,8 +9,8 @@ class CheckForm(forms.Form):
         ('El Viejo','El Viejo'),
         ('Sport','Sport'),
         ('Km - 40','Km - 40'),
-        ('Veterinaria San Pedro', 'Veterinaria San Pedro'),
+        ('Veterinaria San Pedr', 'Veterinaria San Pedr'),
     )
 
     branch = forms.ChoiceField(label='Sucursal', choices=CHOICES, required=True)
-    card = forms.CharField(label="Tarjeta", max_length=20)
+    card = forms.CharField(label="Tarjeta", max_length=20, widget=forms.PasswordInput())
