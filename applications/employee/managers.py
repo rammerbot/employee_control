@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 
@@ -33,9 +33,13 @@ class LunchEstartManager(models.Manager):
     def verify_or_create_start_lunch(self, employee, branch):
 
         date = datetime.now().date()
+        ten_minutes_ago = timedelta(minutes=10)
         register = self.filter(created__icontains =  date, employee = employee.id)
         if register:
-            return "created"
+            if datetime.now() >= register[0].created + ten_minutes_ago:
+                return "created"
+            else:
+                return "too_soon"  
         else:
             self.create(
                 employee = employee,

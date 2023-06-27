@@ -25,30 +25,36 @@ class CheckView(FormView):
         employee = Personal.objects.employee_browser(card)
         register = timetable()
         branch = Branch.objects.branch_browser(branch_form)
-        print(employee)
 
-        if register == "entry":
-            entry = EntryHour.objects.verify_or_create_entry(employee, branch)
-            if entry == "success":
-                messages.success(self.request, "El Registro ha creado exitosamente")
-            else:
-                messages.warning(self.request,"Ya ha sido registrada su entrada el dia de hoy")
-        elif register == "lunch":
-            lunch_start = LunchStart.objects.verify_or_create_start_lunch(employee, branch)
-            if lunch_start == "success":
-                messages.success(self.request,"El Registro del almuerzo ha creado exitosamente")
-            elif lunch_start == "created":
-                luch_end = LunchEnd.objects.verify_or_create_end_lunch(employee, branch)
-                if luch_end == "success":
-                    messages.success(self.request,"Se registro correctamente el regreso del Almuerzo")
-                elif luch_end == "created":
-                    messages.warning(self.request,"El registro de regreso de almuerzo ya ha sido creado anteriormente")
-        elif register == "exit":
-            exit_register =  ExitHour.objects.verify_or_create_exit(employee, branch)
-            if exit_register == "success":
-                messages.success(self.request,"El Registro ha creado exitosamente")
-            elif exit_register == "created":
-                messages.warning(self.request,"Ya ha sido registrada su salida el dia de hoy")
+        if employee != "empty":
+
+            if register == "entry":
+                entry = EntryHour.objects.verify_or_create_entry(employee, branch)
+                if entry == "success":
+                    messages.success(self.request, "El Registro ha creado exitosamente")
+                else:
+                    messages.warning(self.request,"Ya ha sido registrada su entrada el dia de hoy")
+            elif register == "lunch":
+                lunch_start = LunchStart.objects.verify_or_create_start_lunch(employee, branch)
+                if lunch_start == "success":
+                    messages.success(self.request,"El Registro del almuerzo ha creado exitosamente")
+                elif lunch_start == "too_soon":
+                    messages.warning(self.request,"El Registro en la salida de almuerzo ya ha sido creado")
+                elif lunch_start == "created":
+                    luch_end = LunchEnd.objects.verify_or_create_end_lunch(employee, branch)
+                    if luch_end == "success":
+                        messages.success(self.request,"Se registro correctamente el regreso del Almuerzo")
+                    elif luch_end == "created":
+                        messages.warning(self.request,"El registro de regreso de almuerzo ya ha sido creado anteriormente")
+            elif register == "exit":
+                exit_register =  ExitHour.objects.verify_or_create_exit(employee, branch)
+                if exit_register == "success":
+                    messages.success(self.request,"El Registro ha creado exitosamente")
+                elif exit_register == "created":
+                    messages.warning(self.request,"Ya ha sido registrada su salida el dia de hoy")
+            print(lunch_start)
+        else:
+            messages.warning(self.request,"El Codigo es Incorrecto")
             
         return super().form_valid(form)
 # Visualizacion de horas de trabajo por fechas y trabajador
@@ -61,8 +67,8 @@ class HourList(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Ojo, con encontrar el empleado primero...
-        employee = Personal.objects.get(first_name="Chiquinquira")  # Reemplaza con el nombre del empleado correcto
-        # Obtencion de los querysets que contienen los datos.
+        employee = self.object  # Reemplaza con el nombre del empleado correcto
+        # Obtencion de los querysets que contienen los datos
         date = self.request.GET.get('date')
         if date:
             entry_hours = EntryHour.objects.filter(employee=employee, created__date=date).first()
