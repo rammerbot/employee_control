@@ -1,6 +1,6 @@
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
@@ -12,7 +12,7 @@ from django.views.generic import (
     FormView
 )
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth import logout
 from django.contrib import messages
 from .forms import *
 from .models import Personal, Cargo, Habilidades
@@ -36,8 +36,9 @@ class IndexView(FormView):
             return self.form_invalid(form)
         
 # cerrar sesion
-class Logout(LogoutView):
-    next_page = reverse_lazy("app_personal:home")
+def logout_view(request):
+    logout(request)
+    return redirect("app_personal:home")
         
 # Lista de Empleados
 class List_employed(LoginRequiredMixin, ListView):
@@ -115,15 +116,16 @@ class Administrar_empleados(LoginRequiredMixin, ListView):
         return lista
 
 # Cargar empleados nuevos al sistema
-class Crear_empleado(LoginRequiredMixin,CreateView):
+class CrearEmpleado(LoginRequiredMixin,CreateView):
     template_name = 'personal/crear_empleado.html'
     model = Personal
     form_class = Empleado_form
     success_url =reverse_lazy('app_personal:add_empleado')
     login_url = reverse_lazy('app_personal:home')
     def form_valid(self, form):
+        response = super().form_valid(form)
         messages.success(self.request, "Registro de empleado exitoso")
-        return super().form_valid(form)
+        return response
 
 # Actualizar empleados
 class Actualizar(LoginRequiredMixin, UpdateView):

@@ -6,10 +6,10 @@ app_name = 'app_personal'
 urlpatterns = [
     
     path('', views.IndexView.as_view(), name="home"),
-    path('logout/', views.Logout.as_view(), name="logout"),
+    path('logout/', views.logout_view, name="logout"),
     path('list_employed/', views.List_employed.as_view(), name='lista_empleados'),
     path('list_employed_off/', views.List_employed_off.as_view(), name='lista_empleados_off'),
-    path('add_empleado/', views.Crear_empleado.as_view(), name='add_empleado'),
+    path('add_empleado/', views.CrearEmpleado.as_view(), name='add_empleado'),
     path('detalles/<pk>/', views.detalle_personal.as_view(),name='detalle_personal'),
     path('departamento_personal/<departamento>', views.Personal_departamento.as_view(), name='departamento_personal'),
     path('administrar/', views.Administrar.as_view(), name='administrar'),
